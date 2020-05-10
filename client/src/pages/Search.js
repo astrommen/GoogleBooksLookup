@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Container, Row, Col } from "./../components/Grid";
 // import Jumbotron from "./../components/Jumbotron";
+import { List, ListItem } from "./../components/List";
 import { Input, FormBtn } from "./../components/Form";
 
 class Search extends Component {
@@ -26,7 +28,7 @@ class Search extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <div>
+            <div className="searchBar"> 
               <h4> Book Search</h4>
               Book
               <form>
@@ -45,6 +47,28 @@ class Search extends Component {
                   </h4>
                 </FormBtn>
               </form>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-12">
+            <div className="results">
+              <h4> Results </h4>
+              {this.state.books.length ? (
+              <List>
+                {this.state.books.map(book => (
+                  <ListItem key={book._id}>
+                    <Link to={"/books/" + book._id}>
+                      <strong>
+                        {book.title} by {book.author}
+                      </strong>
+                    </Link>
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <h3> No Results to Display </h3>
+              )}
             </div>
           </Col>
         </Row>
