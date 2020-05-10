@@ -10,35 +10,42 @@ class Search extends Component {
   state = {
     books: [],
     title: "",
-    author: "",
+    authors: "",
     description: "",
     image: "",
     link: "",
-    input: ""
+    query: ""
   };
 
   componentDidMount() {
-    this.loadBooks();
+    this.searchGB();
   }
 
-  loadBooks = () => {
-    API.getBooks()
+  searchGB = query => {
+    API.getBooks(query)
       .then(res =>
         this.setState({ 
-          books: res.data, 
-          title: "", 
-          author: "",
-          description: "",
-          image: ""
+          books: res.data.items, 
+          // title: "", 
+          // author: "",
+          // description: "",
+          // image: ""
         })
-      ).catch(err => console.log(err));
-  };
-
+        ).catch(err => console.log(err));
+        
+      };
+      
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
+  };
+
+   // When the form is submitted, search the Giphy API for `this.state.search`
+   handleFormSubmit = event => {
+    event.preventDefault();
+    this.searchGB(this.state.query);
   };
 
   render() {
@@ -51,13 +58,13 @@ class Search extends Component {
               Book
               <form>
                 <Input
-                  value={this.state.input}
+                  value={this.state.query}
                   onChange={this.handleInputChange}
-                  name="input"
+                  name="query"
                   placeholder="Please enter a title"
                 />
                 <FormBtn
-                disabled={!(this.state.input)}
+                disabled={!(this.state.query)}
                 onClick={this.handleFormSubmit}
                 >
                   <h4>
@@ -75,12 +82,14 @@ class Search extends Component {
               {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
+                  console.log(book),
+                  console.log(book.id),
+                  <ListItem key={book.id}>
+                    {/* { <Link to={"/books/" + book._id}> */}
                       <strong>
-                        {book.title} by {book.author}
+                        {book.volumeInfo.title} by {book.volumeInfo.authors}
                       </strong>
-                    </Link>
+                    {/* </Link> } */}
                   </ListItem>
                 ))}
               </List>
