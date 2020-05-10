@@ -85,11 +85,13 @@ class Search extends Component {
                   console.log(book),
                   console.log(book.id),
                   <ListItem key={book.id}>
-                    {/* { <Link to={"/books/" + book._id}> */}
+                    <p>
                       <strong>
                         {book.volumeInfo.title} by {book.volumeInfo.authors}
                       </strong>
-                    {/* </Link> } */}
+                    </p>
+                      <img alt={book.volumeInfo.title} className="img-fluid" src={book.volumeInfo.imageLinks.smallThumbnail} />
+                    
                   </ListItem>
                 ))}
               </List>
