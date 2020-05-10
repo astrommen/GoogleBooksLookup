@@ -80,10 +80,10 @@ class Search extends Component {
             <div className="results">
               <h4> Results </h4>
               {this.state.books.length ? (
+                console.log(this.state.books.length),
               <List>
                 {this.state.books.map(book => (
                   console.log(book),
-                  console.log(book.id),
                   <ListItem key={book.id}>
                     <p>
                       <strong>
@@ -91,7 +91,10 @@ class Search extends Component {
                       </strong>
                     </p>
                       <img alt={book.volumeInfo.title} className="img-fluid" src={book.volumeInfo.imageLinks.smallThumbnail} />
-                    
+                      <span>
+                        {book.volumeInfo.description}
+
+                      </span>
                   </ListItem>
                 ))}
               </List>
