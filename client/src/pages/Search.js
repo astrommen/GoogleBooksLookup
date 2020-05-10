@@ -83,12 +83,18 @@ class Search extends Component {
                 console.log(this.state.books.length),
               <List>
                 {this.state.books.map(book => (
-                  console.log(book),
+                  // console.log(book.volumeInfo.imageLinks.thumbnail),
                   <ListItem key={book.id}>
                     <p>
                       <strong>
                         {book.volumeInfo.title} by {book.volumeInfo.authors}
                       </strong>
+                        <button>
+                      <a href={book.volumeInfo.infoLink}>
+                          View
+                      </a>
+                        </button> 
+                      <button> Save </button>
                     </p>
                       <img alt={book.volumeInfo.title} className="img-fluid" src={book.volumeInfo.imageLinks.smallThumbnail} />
                       <span>
