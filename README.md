@@ -87,11 +87,11 @@ copy of json response:
 Search page:
   Components:
     Nav (3 links)
-      Google Books: [Google Books](https://books.google.com/)
+      Google Books: 
       Search Page
       Saved Page
 
-    Title Card
+    Title Card => completed
       Title: React Google Books Search
       subtitle: Search for & Save Books of Interest
 

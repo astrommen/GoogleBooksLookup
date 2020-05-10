@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "./../components/Grid";
 // import Jumbotron from "./../components/Jumbotron";
@@ -14,6 +15,23 @@ class Search extends Component {
     image: "",
     link: "",
     input: ""
+  };
+
+  componentDidMount() {
+    this.loadBooks();
+  }
+
+  loadBooks = () => {
+    API.getBooks()
+      .then(res =>
+        this.setState({ 
+          books: res.data, 
+          title: "", 
+          author: "",
+          description: "",
+          image: ""
+        })
+      ).catch(err => console.log(err));
   };
 
   handleInputChange = event => {
@@ -73,7 +91,7 @@ class Search extends Component {
           </Col>
         </Row>
       </Container>
-    )
+    );
   }
   
 }
